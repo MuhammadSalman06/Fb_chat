@@ -19,9 +19,13 @@
 
 
 <body>
+    
     <!-- char-area -->
     <section class="message-area">
+
         <div class="container">
+            <input type="checkbox" id="toggle" name="toggle">
+    <label for="toggle">Toggle Theme</label>
             <div class="row">
                 <div class="col-12">
                     <div class="chat-area">
@@ -53,7 +57,7 @@
                                                     <!-- chat-list -->
                                                     <div class="chat-list">
                                                      <div class="chat_name">
-                                                        <a href="#qadeer" class="d-flex align-items-center box  chat ">
+                                                        <a href="#qadeer" class="d-flex align-items-center box  chat1 ">
                                                             <div class="flex-shrink-0">
                                                                 <img class="img-fluid rounded-pill " src="img/WhatsApp Image 2022-10-21 at 11.16.57 AM.jpeg" alt="user img" width="50px">
                                                                 <span class="active"></span>
@@ -247,7 +251,7 @@
                                                   </div>
                                                   <div class="flex-grow-1 ms-3">
                                                       <h3>Qadeer</h3>
-                                                      <p>Online</p>
+                                                      <p id="typing">Typing...</p>
                                                   </div>
                                               </div>
                                           </div>
@@ -316,12 +320,12 @@
                                       </div>
                                   </div>
 
-                                   <p id="typing">Typing...</p>
+                                   
                                   <div class="send-box">
                                     <div id="chatDisp"></div>
-                                    <form action="">
+                                    <form action="" >
                                        
-                                        <input type="text" class="form-control msg_inp" id="messageInput" aria-label="message…" placeholder=" Write message…">
+                                        <input type="text" class="form-control msg_inp" id="messageInput" aria-label="message…" placeholder=" Write message…" required>
 
                                         <button class="snd_msg" type="button" id="sendMessage"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send</button>
                                     </form>
@@ -360,11 +364,12 @@
                                               <div class="d-flex align-items-center">
                                                   <span class="chat-icon"><img class="img-fluid" src="https://mehedihtml.com/chatbox/assets/img/arroleftt.svg" alt="image title"></span>
                                                   <div class="flex-shrink-0">
-                                                      <img class="img-fluid rounded-pill" src="img/p.jpg" alt="user img" width="50px">
+                                                    <span class="active"></span>
+                                                      <img class="img-fluid rounded-pill" src="img/WhatsApp Image 2022-10-21 at 11.25.22 AM.jpeg" alt="user img" width="50px">
                                                   </div>
                                                   <div class="flex-grow-1 ms-3">
                                                       <h3 class="rayan">rayan</h3>
-                                                      <p>Online</p>
+                                                      <p id="typing">Typing...</p>
                                                   </div>
                                               </div>
                                           </div>
@@ -441,11 +446,12 @@
                                    
                                   <div class="send-box">
                                     <div id="chatDisp"></div>
-                                    <p id="typing">Typing...</p>
-                                    <form action="">
-                                        <input type="text" class="form-control msg_inp" id="messageInput" aria-label="message…" placeholder="Write message…">
+                                    
+                                    <form action="" >
+                                       
+                                        <input type="text" class="form-control msg_inp" id="message_Input" aria-label="message…" placeholder=" Write message…" required>
 
-                                        <button class="snd_msg" type="button" id="sendMessage"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send</button>
+                                        <button class="snd_msg2" type="button" id="sendMessage"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send</button>
                                     </form>
                                           <div class="send-btns">
                                           <div class="attach">
@@ -487,7 +493,14 @@
 
 
 <script>
-  jQuery(document).ready(function() {
+
+$(".searching").keyup(function () {
+    var searchName = $(this).val().toLowerCase();
+    $(".chat_name").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchName) > -1);
+    });
+});
+  $(document).ready(function() {
 
 $(".chat-list a").click(function() {
     $(".chatbox").addClass('showbox');
@@ -501,9 +514,10 @@ $(".chat-icon").click(function() {
 
 $('.chat2').click(function(){
   $('#rayan').show();
+
   $('#qadeer').hide();
 });
-$('.chat').click(function(){
+$('.chat1').click(function(){
   $('#qadeer').show();
   $('#rayan').hide();
 });
@@ -511,40 +525,51 @@ $('.chat').click(function(){
 
 });
 
-$('.snd_msg').click(function(){
-  var new_msg = $(this).prev().val();
-  $(this).prev().val('');
-  // <li class="repaly"><p>msg________test</p><span class="time">junt now</span></li>
-  $('.msg-body ul').append('<li class="repaly"><p>'+new_msg+'</p><span class="time">junt now</span></li>');
-});
 
+  $(".snd_msg").click(function () {
+      var type = $("#messageInput").val();
+      if(type != ""){
+        var new_msg = $(this).prev().val();
+             $(this).prev().val('');
+             $('.msg-body ul').append('<li class="repaly"><p>'+new_msg+'</p><span class="time">junt now</span></li>');
+             $("#typing").replaceWith("  <p>Online</p>")
+      }else{
+        alert("No value")
+      }
+  });
+  $(".snd_msg2").click(function () {
+      var type1 = $("#message_Input").val();
+      if(type1 != ""){
+        var new_msg = $(this).prev().val();
+             $(this).prev().val('');
+             $('.modal-body2 ul').append('<li class="repaly"><p>'+new_msg+'</p><span class="time">junt now</span></li>');
+             $("#typing").replaceWith("  <p>Online</p>")
+      }else{
+        alert("No value")
+      }
+  });
 
 </script>
 
 
-<script>
-    $(".searching").keyup(function () {
-    var searchName = $(this).val().toLowerCase();
-    $(".chat_name").filter(function () {
-        $(this).toggle($(this).text().toLowerCase().indexOf(searchName) > -1);
-    });
-});
-</script>
+
 
 <script>
-
+//   var userName = prompt("Enter your Name...","Mansoor");
+    var nam = document.getElementById('userName');
+    // nam.innerHTML = userName;
 
      var inputField = document.getElementById('messageInput');
     var chatDisplay = document.getElementById('chatDisp');
     var typing = document.getElementById('typing');
 
-    inputField.addEventListener('keydown', function(){
-        typing.style.visibility="visible";
-    });
+inputField.addEventListener('keydown', function(){
+    typing.style.visibility="visible";
+});
 
-    inputField.addEventListener('keyup', function(){
-        typing.style.visibility="hidden";
-    });
+inputField.addEventListener('keyup', function(){
+    typing.style.visibility="hidden";
+});
 
 
      var displayChat = document.getElementById('chatDisp');
@@ -559,10 +584,10 @@ $('.snd_msg').click(function(){
      var i =0;
      send.addEventListener('click', function () {
 
-         if (document.getElementById('messageInput').value == ""){
-             alert("please Enter something in Chat....");
-             return
-         }
+        //  if (document.getElementById('messageInput').value == ""){
+        //      alert("please Enter something in Chat....");
+        //      return
+        //  }
 
          var message={
              name : userName,
@@ -585,8 +610,14 @@ $('.snd_msg').click(function(){
          chatDisplay.innerHTML += templateDiv;
      });
 
+     const toggle = document.getElementById("toggle");
+
+toggle.addEventListener("change", (e) => {
+    document.body.classList.toggle("dark", e.target.checked);
+});
+
 </script>
 
-      
+
 </body>
 </html>
