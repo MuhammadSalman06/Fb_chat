@@ -24,8 +24,7 @@
     <section class="message-area">
 
         <div class="container">
-            <input type="checkbox" id="toggle" name="toggle">
-    <label for="toggle">Toggle Theme</label>
+    <button class="btn btn-danger rounded-3 mb-2"> <a href="/index.html" class="text-deoration-none text-light mb-2">LogOut</a> </button>
             <div class="row">
                 <div class="col-12">
                     <div class="chat-area">
@@ -610,11 +609,7 @@ inputField.addEventListener('keyup', function(){
          chatDisplay.innerHTML += templateDiv;
      });
 
-     const toggle = document.getElementById("toggle");
 
-toggle.addEventListener("change", (e) => {
-    document.body.classList.toggle("dark", e.target.checked);
-});
 
 </script>
 
